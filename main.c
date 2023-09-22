@@ -9,3 +9,5 @@ typedef struct {
     eent* head;
     size_t size;
 } array;
+
+int a;
