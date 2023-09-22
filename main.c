@@ -6,8 +6,14 @@ typedef struct{
     int* next;
 } eent;
 
-eent* createArray(int size) {
-    eent* array = malloc(size * sizeof(eent));
+typedef struct {
+    eent* head;
+    size_t size;
+} eentArray;
+
+eentArray* createArray(int size) {
+
+    eentArray* array = malloc(size * sizeof(eent));
     return array;
 }
 
@@ -16,5 +22,5 @@ int setItem(int item) {
 }
 
 int main() {
-    eent* array = createArray('a');
+    eentArray* array = createArray('a');
 }
