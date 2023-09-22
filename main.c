@@ -7,14 +7,14 @@ typedef struct{
 } eent;
 
 eent* createArray(int size) {
-    eent* array = malloc(size);
+    eent* array = malloc(size * sizeof(eent));
     return array;
 }
 
 int setItem(int item) {
-    return 0;
+    return item;
 }
 
 int main() {
-    eent* array = createArray(1);
+    eent* array = createArray('a');
 }
