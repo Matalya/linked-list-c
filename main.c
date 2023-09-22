@@ -1,11 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct{
     int item;
     int* next;
 } eent;
 
-typedef struct {
-    eent* head;
-    size_t size;
-} array;
+eent* createArray(int size) {
+    eent* array = malloc(size);
+    return array;
+}
+
+int setItem(int item) {
+    return 0;
+}
+
+int main() {
+    eent* array = createArray(1);
+}
