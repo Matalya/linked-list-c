@@ -3,6 +3,7 @@
 #include <stdlib.h>
 
 typedef struct{
+    int* prev;
     int item;
     int* next;
 } eent;
@@ -12,24 +13,26 @@ typedef struct {
     size_t size;
 } eentArray;
 
-int index_overflows(eentArray array, size_t index) {
+int index_inbound(eentArray array, size_t index) {
     return index >= array.size || index < 0;
 }
 
-/*eentArray**/ void createArray(int size) {
-
-    /*eentArray* array = {
+eentArray createArray(int size) {
+    eentArray array = {
         .head = malloc(size * sizeof(eent)),
         .size = size,
     } ;
-    return array;*/
+    return array;
 }
 
-int setItem(int item) {
-    return item;
+int appendItem(eentArray array, int item) {
+    eent* ptr;
+    while (ptr != NULL) {
+        
+    }
+    return 1;
 }
 
 int main() {
-    //eentArray* array = createArray('a');
-    printf("%d\n", isdigit('1'));
+    eentArray array = createArray('a');
 }
