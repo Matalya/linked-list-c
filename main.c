@@ -2,37 +2,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct{
-    int* prev;
-    int item;
-    int* next;
-} eent;
-
 typedef struct {
-    eent* head;
+    int* head;
     size_t size;
-} eentArray;
+} Array;
 
-int index_inbound(eentArray array, size_t index) {
+int index_inbound(Array array, size_t index) {
     return index >= array.size || index < 0;
 }
 
-eentArray createArray(int size) {
-    eentArray array = {
-        .head = malloc(size * sizeof(eent)),
+Array createArray(int size) {
+    Array array = {
+        .head = malloc(size * sizeof(int)),
         .size = size,
     } ;
     return array;
 }
 
-int appendItem(eentArray array, int item) {
-    eent* ptr;
-    while (ptr != NULL) {
-        
-    }
+int appendItem(Array array, int item) {
+    
     return 1;
 }
 
 int main() {
-    eentArray array = createArray('a');
+    Array array = createArray('a');
 }
