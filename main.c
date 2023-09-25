@@ -9,48 +9,44 @@ struct _Eent {
     eent* next;
 };
 
+typedef struct {
+    eent* head;
+    size_t size;
+} eentList;
+
 eent* createElement(int item) {
     eent* element = malloc(sizeof(eent));
     element->item = item;
     element->next = NULL;
-    element->prev = NULL; //for now
+    element->prev = NULL;
     return element;
 }
 
-eent* createArray(int item) {
-    printf("Initializing array\n");
+eentList* createArray(int item) {
     eent* array = createElement(item);
-    printf("Array initialized\n");
-    return array;
+    eentList* header = malloc(sizeof(eentList));
+    header->head = array;
+    header->size = 1;
+    return header;
 }
 
-eent* getToArrayTail(eent* array) {
-    eent* nextElement = array->next;
-    
-    printf("nextElement is %p\n", nextElement);
+eent* getToArrayTail(eentList* array) {
+    eent* nextElement = array->head;
     if (nextElement == NULL) {
-        return array;
+        return NULL;
     }
-    
     while (nextElement->next != NULL) {
         nextElement = nextElement->next;
-        printf("nextElement is %p\n", nextElement);
     }
     
-    printf("Reached null. Returning nextElement.\n");
     return nextElement;
 }
 
-void addElement(eent* array, int item) {
-    printf("Calling getToArrayTail\n");
+void addElement(eentList* array, int item) {
     eent* tail = getToArrayTail(array);
-    eent element = {
-        .item = item,
-        .prev = tail,
-        .next = NULL,
-    };
-    array->next = &element;
-    printf("Element successfully created preceded by %p, with item %d\n", element.prev, element.item);
+    eent* element = createElement(item);
+    element->prev = tail;
+    tail->next = element;
 }
 
 size_t len(eent* array) {
@@ -65,22 +61,24 @@ size_t len(eent* array) {
     }
     while (head->next != NULL) {
         head = head->next;
-        printf("Head of len assigned as %p\n", head);
         counter++;
-        printf("Counter is currently at %ld\n", counter);
     }
     return counter;
 }
 
+void printArray(eent* tail) {
+    if (tail == NULL) {
+        return;
+    }
+    printArray(tail->prev);
+    printf("%d, ", tail->item);
+}
+
 int main() {
-    printf("Calling createArray\n");
-    eent* array = createArray(5);
-    printf("Calling addElement 1\n");
+    eentList* array = createArray(5);
     addElement(array, 1);
-    printf("Second item created successfully. Calling addElement 2\n");
     addElement(array, 2);
-    printf("Third item created successfully. Calling addElement 3\n");
     addElement(array, 3);
-    printf("Calling len\n");
-    printf("%ld\n", len(NULL));
+    printArray(getToArrayTail(array));
+    printf("\n");
 }
