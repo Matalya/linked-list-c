@@ -34,7 +34,7 @@ eent* getToArrayTail(eent* array) {
     
     while (nextElement->next != NULL) {
         nextElement = nextElement->next;
-        printf("Head is %p\n", nextElement);
+        printf("nextElement is %p\n", nextElement);
     }
     
     printf("Reached null. Returning nextElement.\n");
@@ -77,9 +77,9 @@ int main() {
     eent* array = createArray(5);
     printf("Calling addElement 1\n");
     addElement(array, 1);
-    printf("Calling addElement 2\n");
+    printf("Second item created successfully. Calling addElement 2\n");
     addElement(array, 2);
-    printf("Calling addElement 3\n");
+    printf("Third item created successfully. Calling addElement 3\n");
     addElement(array, 3);
     printf("Calling len\n");
     printf("%ld\n", len(NULL));
