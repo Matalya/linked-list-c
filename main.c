@@ -66,19 +66,36 @@ size_t len(eent* array) {
     return counter;
 }
 
-void printArray(eent* tail) {
+void printArray(eentList* array) {
+    eent* head = array->head;
+    printf("[");
+    while (head != NULL) {
+        printf("%d%s", head->item, head->next != NULL ? ", " : "");
+        head = head->next;
+    }
+    printf("]\n");
+}
+
+void tailHeavyRecursivePrintArray(eent* tail) {
     if (tail == NULL) {
         return;
     }
-    printArray(tail->prev);
     printf("%d, ", tail->item);
+    tailHeavyRecursivePrintArray(tail->prev);
+}
+
+void headHeavyRecursivePrintArray(eent* head) {
+    if (head == NULL) {
+        return;
+    }
+    printf("%d, ", head->item);
+    headHeavyRecursivePrintArray(head->next);
 }
 
 int main() {
-    eentList* array = createArray(5);
-    addElement(array, 1);
-    addElement(array, 2);
-    addElement(array, 3);
-    printArray(getToArrayTail(array));
-    printf("\n");
+    eentList* array = createArray(0);
+    for (int i = 1; i < 100000; i++) {
+        addElement(array, i);
+    }
+    printArray(array);
 }
