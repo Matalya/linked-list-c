@@ -92,10 +92,23 @@ void headHeavyRecursivePrintArray(eent* head) {
     headHeavyRecursivePrintArray(head->next);
 }
 
+eent* getElement(eentList* array, size_t index) {
+    int counter = 0;
+    if (index >= array->size) {
+        return NULL;
+    }
+    eent* head = array->head->next;
+    while (counter != index) {
+        counter++;
+        head = head->next;
+    }
+    return head;
+}
+
 int main() {
     eentList* array = createArray(0);
-    for (int i = 1; i < 100000; i++) {
+    for (int i = 1; i < 10; i++) {
         addElement(array, i);
     }
-    printArray(array);
+    printf("The fifth item is %d", getElement(array, 0)->next->next->next->next->item);
 }
